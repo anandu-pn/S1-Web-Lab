@@ -19,12 +19,14 @@
 <?php
 require 'connect.php';
 if(isset($_POST['sub'])){
+    if(($_POST['username']) && $_POST['username'] != NULL && isset($_POST['pass']) && $_POST['pass'] != NULL)
+    {
     $user=$_POST['username'];
     $pass=$_POST['pass'];
-if($pas!=''){
+    
     $data="SELECT * FROM userdb WHERE name='$user' AND password='$pass'";
     $q=mysqli_query($conn,$data);
-    $result=mysqli_num_rows($result);
+    $result=mysqli_num_rows($q);
     if($result){
         session_start(); 
         $_SESSION['username'] = $user;
@@ -33,10 +35,15 @@ if($pas!=''){
         //header('Location:login.php');
         exit();
     }
-    else { echo "Error: " . mysqli_error($conn); }
+    else { echo "password or username incorrect or Error:" . mysqli_error($conn); }
+    }
+
+    
+    else{
+        echo "<script>alert('Enter valid password and username');
+            window.location.href = 'login.php';</script>";
+    }
 }
-else{
-    echo "<script>alert('password do not match re enter password');</script>";
-}
-}
+
+
 ?>

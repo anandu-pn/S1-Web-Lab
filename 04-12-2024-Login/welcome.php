@@ -1,5 +1,6 @@
 <?php
-echo  $_SESSION['username'],"welcome";
+session_start();
+echo  $_SESSION['username']," welcome";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,5 +10,15 @@ echo  $_SESSION['username'],"welcome";
     <title>Document</title>
 </head>
 <body>
+    <form action="" method="post">
+        <input type="submit" value="LogOUT" name="logout">
+    </form>
 </body>
 </html>
+<?php
+    if(isset($_POST['logout'])){
+        echo "<script>alert ('{$_SESSION['username']} Logged out');
+              window.location.href = 'login.php';</script>;</script>";
+        session_destroy();
+    }
+?>
